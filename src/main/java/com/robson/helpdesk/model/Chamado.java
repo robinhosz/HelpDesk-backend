@@ -40,7 +40,7 @@ public class Chamado implements Serializable {
 	private LocalDate dataAbertura = LocalDate.now();
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Prioridade prioridade;
 	@Enumerated(EnumType.STRING)
@@ -53,5 +53,17 @@ public class Chamado implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+
+	public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico,
+			Cliente cliente) {
+		super();
+		this.id = id;
+		this.prioridade = prioridade;
+		this.status = status;
+		this.titulo = titulo;
+		this.observacoes = observacoes;
+		this.tecnico = tecnico;
+		this.cliente = cliente;
+	}
 
 }
