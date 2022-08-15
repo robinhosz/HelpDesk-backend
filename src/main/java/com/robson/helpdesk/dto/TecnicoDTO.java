@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -24,12 +26,16 @@ public class TecnicoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	protected Integer id;
+	
+	@NotBlank(message = "O campo NOME é requerido")
 	protected String nome;
 
 	@CPF
 	protected String cpf;
 	@Email
 	protected String email;
+	
+	@NotBlank(message = "O campo SENHA é requerido")
 	protected String senha;
 	protected Set<Perfil> perfis = new HashSet<>();
 

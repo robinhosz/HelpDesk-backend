@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -12,6 +14,20 @@ import com.robson.helpdesk.service.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<StandardError> listaDeErrors(MethodArgumentNotValidException ex, HttpServletRequest request) {
+
+		ValidationErro error = new ValidationErro(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+				"Error in field validations!", ex.getMessage(), request.getRequestURI());
+
+		for (FieldError x : ex.getBindingResult().getFieldErrors()) {
+			error.addError(x.getField(), x.getDefaultMessage());
+		}
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+
+	}
 
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException ex,
@@ -22,15 +38,16 @@ public class ControllerExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-	
+
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityViolationException ex,
-			HttpServletRequest request) {
+	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityViolationException ex, HttpServletRequest request) {
 
 		StandardError erro = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
 				"Data Violation", ex.getMessage(), request.getRequestURI());
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
+
+	
 
 }
