@@ -43,6 +43,13 @@ public class TecnicoService {
 		return tecnicoRepository.save(mapper.map(obj, Tecnico.class));
 	}
 
+	public Tecnico update(TecnicoDTO obj) {
+		findById(obj.getId());
+		findByCpfAndEmail(obj);
+		return tecnicoRepository.save(mapper.map(obj, Tecnico.class));
+	}
+
+	
 	private void findByCpfAndEmail(TecnicoDTO obj) {
 		Optional<Pessoa> pessoa = pessoaRepository.findByCpf(obj.getCpf());
 		if(pessoa.isPresent() && pessoa.get().getId() != obj.getId()) {
