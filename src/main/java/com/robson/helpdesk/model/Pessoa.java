@@ -67,7 +67,7 @@ public abstract class Pessoa implements Serializable {
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	
+	//Fix bug enum
 	public void addPerfil(Perfil perfil) {
 		this.perfis.add(Perfil.CLIENTE);
 	}
