@@ -14,11 +14,9 @@ import com.robson.helpdesk.enums.Perfil;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class TecnicoDTO implements Serializable {
@@ -37,5 +35,9 @@ public class TecnicoDTO implements Serializable {
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();
+
+	public TecnicoDTO() {
+		super();
+	}
 
 }
