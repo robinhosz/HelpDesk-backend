@@ -21,6 +21,7 @@ public class Cliente extends Pessoa {
 
 	private static final long serialVersionUID = 1L;
 
+	//Serialization loop refact!
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Chamado> chamados = new ArrayList<>();
