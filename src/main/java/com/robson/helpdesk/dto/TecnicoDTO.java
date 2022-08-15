@@ -38,6 +38,10 @@ public class TecnicoDTO implements Serializable {
 
 	public TecnicoDTO() {
 		super();
+		addPerfil(Perfil.CLIENTE);
 	}
 
+	public void addPerfil(Perfil perfil) {
+		this.perfis.add(Perfil.CLIENTE);
+	}
 }

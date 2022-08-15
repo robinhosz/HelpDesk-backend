@@ -31,7 +31,7 @@ public class Cliente extends Pessoa {
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Cliente(Integer id, String nome, String cpf, String email, String senha, Set<Integer> perfis,
+	public Cliente(Integer id, String nome, String cpf, String email, String senha, Set<Perfil> perfis,
 			LocalDate dataCriacao) {
 		super(id, nome, cpf, email, senha, perfis, dataCriacao);
 		addPerfil(Perfil.CLIENTE);

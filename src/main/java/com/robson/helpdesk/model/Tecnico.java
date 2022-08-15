@@ -32,7 +32,7 @@ public class Tecnico extends Pessoa {
 
 	}
 
-	public Tecnico(Integer id, String nome, String cpf, String email, String senha, Set<Integer> perfis,
+	public Tecnico(Integer id, String nome, String cpf, String email, String senha, Set<Perfil> perfis,
 			LocalDate dataCriacao) {
 		super(id, nome, cpf, email, senha, perfis, dataCriacao);
 		addPerfil(Perfil.CLIENTE);

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -48,7 +47,7 @@ public abstract class Pessoa implements Serializable {
 	protected String senha;
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
-	protected Set<Integer> perfis = new HashSet<>();
+	protected Set<Perfil> perfis = new HashSet<>();
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();
@@ -68,12 +67,9 @@ public abstract class Pessoa implements Serializable {
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Set<Perfil> getPerfis() {
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
-	}
-
+	
 	public void addPerfil(Perfil perfil) {
-		this.perfis.add(perfil.getKey());
+		this.perfis.add(Perfil.CLIENTE);
 	}
 
 }
