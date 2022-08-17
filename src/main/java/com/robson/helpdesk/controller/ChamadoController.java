@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.robson.helpdesk.dto.ChamadoDTO;
-import com.robson.helpdesk.dto.ClienteDTO;
 import com.robson.helpdesk.service.ChamadoService;
 
 @RestController

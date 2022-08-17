@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.robson.helpdesk.dto.ChamadoDTO;
-import com.robson.helpdesk.enums.Status;
 import com.robson.helpdesk.model.Chamado;
 import com.robson.helpdesk.repository.ChamadoRepository;
 import com.robson.helpdesk.service.exceptions.ObjectNotFoundException;
