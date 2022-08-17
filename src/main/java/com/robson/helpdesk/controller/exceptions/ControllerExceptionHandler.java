@@ -14,7 +14,7 @@ import com.robson.helpdesk.service.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
-	
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> listaDeErrors(MethodArgumentNotValidException ex, HttpServletRequest request) {
 
@@ -48,6 +48,13 @@ public class ControllerExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
 
-	
+	@ExceptionHandler(javax.persistence.EntityNotFoundException.class)
+	public ResponseEntity<StandardError> entityNotFound(javax.persistence.EntityNotFoundException ex, HttpServletRequest request) {
+
+		StandardError erro = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
+				"Entity Not Found", ex.getMessage(), request.getRequestURI());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
 
 }

@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.robson.helpdesk.enums.Prioridade;
@@ -41,8 +43,11 @@ public class Chamado implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
 
+	@NotNull(message = "O campo PRIORIDADE é requerido")
 	@Enumerated(EnumType.STRING)
 	private Prioridade prioridade;
+	
+	@NotNull(message = "O campo STATUS é requerido")
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	private String titulo;
