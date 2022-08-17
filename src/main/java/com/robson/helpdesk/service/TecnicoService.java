@@ -48,6 +48,15 @@ public class TecnicoService {
 		findByCpfAndEmail(obj);
 		return tecnicoRepository.save(mapper.map(obj, Tecnico.class));
 	}
+	
+	public void delete(Integer id) {
+		Tecnico obj = findById(id);
+		if(obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
+		} 
+			tecnicoRepository.deleteById(id);
+		 
+	}
 
 	
 	private void findByCpfAndEmail(TecnicoDTO obj) {
