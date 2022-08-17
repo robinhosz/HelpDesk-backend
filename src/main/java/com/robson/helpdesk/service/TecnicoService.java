@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.robson.helpdesk.dto.TecnicoDTO;
@@ -23,6 +24,10 @@ public class TecnicoService {
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -39,6 +44,7 @@ public class TecnicoService {
 
 	public Tecnico create(TecnicoDTO obj) {
 		obj.setId(null);
+		obj.setSenha(encoder.encode(obj.getSenha()));
 		findByCpfAndEmail(obj);
 		return tecnicoRepository.save(mapper.map(obj, Tecnico.class));
 	}
