@@ -1,5 +1,6 @@
 package com.robson.helpdesk.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -15,13 +16,17 @@ public class ChamadoService {
 
 	@Autowired
 	private ChamadoRepository chamadoRepository;
-	
+
 	@Autowired
 	private ModelMapper mapper;
-	
+
 	public Chamado findById(Integer id) {
 		Optional<Chamado> obj = chamadoRepository.findById(id);
-		
+
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com a id: " + id));
+	}
+
+	public List<Chamado> findAll() {
+		return chamadoRepository.findAll();
 	}
 }

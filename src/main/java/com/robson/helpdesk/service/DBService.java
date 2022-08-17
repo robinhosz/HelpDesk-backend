@@ -12,9 +12,7 @@ import com.robson.helpdesk.model.Chamado;
 import com.robson.helpdesk.model.Cliente;
 import com.robson.helpdesk.model.Tecnico;
 import com.robson.helpdesk.repository.ChamadoRepository;
-import com.robson.helpdesk.repository.ClienteRepository;
 import com.robson.helpdesk.repository.PessoaRepository;
-import com.robson.helpdesk.repository.TecnicoRepository;
 
 @Service
 public class DBService {
