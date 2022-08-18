@@ -1,20 +1,19 @@
 package com.robson.helpdesk.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.robson.helpdesk.dto.ClienteDTO;
+import com.robson.helpdesk.model.Cliente;
+import com.robson.helpdesk.model.Pessoa;
+import com.robson.helpdesk.repository.ClienteRepository;
+import com.robson.helpdesk.repository.PessoaRepository;
+import com.robson.helpdesk.service.exceptions.DataIntegrityViolationException;
+import com.robson.helpdesk.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.robson.helpdesk.dto.ClienteDTO;
-import com.robson.helpdesk.model.Pessoa;
-import com.robson.helpdesk.model.Cliente;
-import com.robson.helpdesk.repository.PessoaRepository;
-import com.robson.helpdesk.repository.ClienteRepository;
-import com.robson.helpdesk.service.exceptions.DataIntegrityViolationException;
-import com.robson.helpdesk.service.exceptions.ObjectNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -56,7 +55,7 @@ public class ClienteService {
 	
 	public void delete(Integer id) {
 		Cliente obj = findById(id);
-		if(obj.getChamados().size() > 0) {
+		if(!obj.getChamados().isEmpty()) {
 			throw new DataIntegrityViolationException("Cliente possui ordens de serviço e não pode ser deletado!");
 		} 
 		clienteRepository.deleteById(id);

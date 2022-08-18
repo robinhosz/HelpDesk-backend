@@ -1,13 +1,5 @@
 package com.robson.helpdesk.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.robson.helpdesk.dto.TecnicoDTO;
 import com.robson.helpdesk.model.Pessoa;
 import com.robson.helpdesk.model.Tecnico;
@@ -15,6 +7,13 @@ import com.robson.helpdesk.repository.PessoaRepository;
 import com.robson.helpdesk.repository.TecnicoRepository;
 import com.robson.helpdesk.service.exceptions.DataIntegrityViolationException;
 import com.robson.helpdesk.service.exceptions.ObjectNotFoundException;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TecnicoService {
@@ -57,7 +56,7 @@ public class TecnicoService {
 	
 	public void delete(Integer id) {
 		Tecnico obj = findById(id);
-		if(obj.getChamados().size() > 0) {
+		if(!obj.getChamados().isEmpty()) {
 			throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
 		} 
 			tecnicoRepository.deleteById(id);
