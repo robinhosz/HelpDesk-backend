@@ -37,11 +37,6 @@ class TecnicoControllerTest {
     public static final LocalDate DATA = LocalDate.now();
     public static final Integer ID = 1;
     public static final int INDEX = 0;
-    public static final String TECNICO_POSSUI_ORDENS = "Técnico possui ordens de serviço e não pode ser deletado!";
-
-    public static final String CPF_JA_CADASTRADO_NO_SISTEMA = "CPF Já cadastrado no sistema";
-    public static final String OBJETO_NAO_ENCONTRADO = "Objeto não encontrado com a id: " + ID;
-
     @InjectMocks
     private TecnicoController tecnicoController;
 
