@@ -26,20 +26,20 @@ import java.util.Set;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class TecnicoServiceTest {
 
-	public static final String NOME = "Valdir";
-	public static final String EMAIL = "valdir@mail.com";
+	public static final String NOME = "Robson";
+	public static final String EMAIL = "robson@mail.com";
 	public static final String CPF = "063.550.699-84";
 	public static final String SENHA = "123";
 	public static final Set<Perfil> PERFIL = new HashSet<>();
 	public static final LocalDate DATA = LocalDate.now();
 	public static final Integer ID = 1;
 	public static final int INDEX = 0;
-	public static final String EMAIL_JA_CADASTRADO_NO_SISTEMA = "E-mail Já cadastrado no sistema";
+	public static final String TECNICO_POSSUI_ORDENS = "Técnico possui ordens de serviço e não pode ser deletado!";
 
 	public static final String CPF_JA_CADASTRADO_NO_SISTEMA = "CPF Já cadastrado no sistema";
 	public static final String OBJETO_NAO_ENCONTRADO = "Objeto não encontrado com a id: " + ID;
@@ -170,6 +170,26 @@ class TecnicoServiceTest {
 
 		}
 
+	}
+
+	@Test
+	void deleteWithSuccess() {
+		when(tecnicoRepository.findById(anyInt())).thenReturn(optionalTecnico);
+		doNothing().when(tecnicoRepository).deleteById(anyInt());
+		tecnicoService.delete(ID);
+		verify(tecnicoRepository, times(1)).deleteById(anyInt());
+	}
+
+	@Test
+	void deleteWithDataIntegrity() {
+		when(tecnicoRepository.findById(anyInt())).thenThrow(new DataIntegrityViolationException(TECNICO_POSSUI_ORDENS));
+		try {
+			tecnicoService.delete(ID);
+
+		} catch(Exception ex) {
+			assertEquals(DataIntegrityViolationException.class, ex.getClass());
+			assertEquals(TECNICO_POSSUI_ORDENS, ex.getMessage());
+		}
 	}
 
 	private void startTecnico() {

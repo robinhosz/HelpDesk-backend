@@ -60,7 +60,6 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
 		} 
 			tecnicoRepository.deleteById(id);
-		 
 	}
 
 	
