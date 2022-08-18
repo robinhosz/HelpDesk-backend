@@ -73,7 +73,7 @@ class ClienteServiceTest {
     }
 
     @Test
-    void whenFindByIdThenReturnAnTecnicoInstance() {
+    void whenFindByIdThenReturnAnClienteInstance() {
         when(clienteRepository.findById(anyInt())).thenReturn(optionalCliente);
 
         Cliente response = clienteService.findById(ID);
@@ -102,7 +102,7 @@ class ClienteServiceTest {
     }
 
     @Test
-    void whenFinAllThenReturnAnListOfTecnicos() {
+    void whenFinAllThenReturnAnListOfClientes() {
         when(clienteRepository.findAll()).thenReturn(List.of(cliente));
 
         List<Cliente> response = clienteService.findAll();
