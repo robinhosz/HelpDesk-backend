@@ -46,7 +46,7 @@ $ cd dsmovie
 
 
 
-### 🧑 Autor
+### 🧑 Author
 
 <a href="http://portfoliojrsz.herokuapp.com/">
  <img style="border-radius: 8px" src="https://user-images.githubusercontent.com/82779533/158067762-8d25be74-d955-41da-8a96-f400e75f902b.jpg" width="100px;" alt="José Robson"/>
@@ -57,7 +57,7 @@ $ cd dsmovie
 <br />
 <br />
 
-:point_down: Entre em contato.
+:point_down: Get in touch!
 
 <br />
 
