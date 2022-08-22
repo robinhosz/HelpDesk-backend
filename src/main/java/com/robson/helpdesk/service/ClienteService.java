@@ -49,6 +49,7 @@ public class ClienteService {
 
 	public Cliente update(ClienteDTO obj) {
 		Cliente oldObj = findById(obj.getId());
+		//fix
 		if(!obj.getSenha().equals(oldObj.getSenha())) {
 			obj.setSenha(encoder.encode(obj.getSenha()));
 		}
