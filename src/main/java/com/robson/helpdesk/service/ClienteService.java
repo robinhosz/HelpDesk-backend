@@ -48,7 +48,10 @@ public class ClienteService {
 	}
 
 	public Cliente update(ClienteDTO obj) {
-		findById(obj.getId());
+		Cliente oldObj = findById(obj.getId());
+		if(!obj.getSenha().equals(oldObj.getSenha())) {
+			obj.setSenha(encoder.encode(obj.getSenha()));
+		}
 		findByCpfAndEmail(obj);
 		return clienteRepository.save(mapper.map(obj, Cliente.class));
 	}

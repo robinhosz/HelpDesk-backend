@@ -49,7 +49,10 @@ public class TecnicoService {
 	}
 
 	public Tecnico update(TecnicoDTO obj) {
-		findById(obj.getId());
+		Tecnico oldObj = findById(obj.getId());
+		if(!obj.getSenha().equals(oldObj.getSenha())) {
+			obj.setSenha(encoder.encode(obj.getSenha()));
+		}
 		findByCpfAndEmail(obj);
 		return tecnicoRepository.save(mapper.map(obj, Tecnico.class));
 	}
